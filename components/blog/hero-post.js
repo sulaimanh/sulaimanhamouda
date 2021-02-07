@@ -27,7 +27,7 @@ export default function HeroPost({
     <section>
       <H2>Recent Post</H2>
       <hr className='my-5' />
-      <div className='mb-8'>
+      <div className='mb-9'>
         <CoverImage
           title={title}
           src={coverImage}
