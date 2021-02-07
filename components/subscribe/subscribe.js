@@ -47,7 +47,7 @@ export default function Subscribe({ show, handler, className }) {
       {show ? (
         <div className='absolute right-5 flex items-center '>
           <MP className='text-gray-400 mr-5'>
-            {data?.subscribers.count} subscribers
+            {data ? data.subscribers : "--"} subscribers
           </MP>
           <FontAwesomeIcon
             onClick={handler}
@@ -58,7 +58,7 @@ export default function Subscribe({ show, handler, className }) {
         </div>
       ) : (
         <MP className=' absolute right-5 text-gray-400'>
-          {data?.subscribers.count} subscribers
+          {data ? data.subscribers : "--"} subscribers
         </MP>
       )}
       <div className='flex flex-col md:flex md:flex-row'>

@@ -1,20 +1,18 @@
 export default async function Subscribe(req, res) {
   const { email } = req.body;
-  console.log(email);
-  if (!email) {
-    return res.status(400).json({ error: "Please enter your email." });
-  }
 
   try {
+    const LIST_ID = process.env.MAILCHIMP_LIST_ID;
+    const API_KEY = process.env.MAILCHIMP_API_KEY;
+
     const response = await fetch(
-      `https://api.buttondown.email/v1/subscribers`,
+      `https://${
+        API_KEY.split("-")[1]
+      }.api.mailchimp.com/3.0/lists/${LIST_ID}/members`,
       {
-        body: JSON.stringify({
-          email: email,
-          tags: ["sulaiman hamouda"]
-        }),
+        body: JSON.stringify({ email_address: email, status: "subscribed" }),
         headers: {
-          Authorization: `Token ${process.env.BUTTONDOWN_API_KEY}`,
+          Authorization: `apikey ${API_KEY}`,
           "Content-Type": "application/json"
         },
         method: "POST"
@@ -24,13 +22,14 @@ export default async function Subscribe(req, res) {
     if (response.status >= 400) {
       const text = await response.text();
 
-      if (text.includes("already subscribed")) {
+      if (text.includes("Member Exists")) {
         return res.status(400).json({
           error: `Seems like you are already a subscriber.`
         });
       }
       return res.status(400).json({
-        error: text
+        error:
+          "Hmmm... something went wrong. Please contact me at sulaiman@sulaimanhamouda.com"
       });
     }
 

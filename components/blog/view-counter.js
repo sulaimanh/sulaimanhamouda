@@ -8,5 +8,5 @@ export default function ViewCount({ slug }) {
     })
   );
 
-  return <span>{data?.views} views</span>;
+  return <span>{data ? data.views : "--"} views</span>;
 }
