@@ -7,16 +7,18 @@ export default function CoverImage({
   slug,
   height,
   width,
-  section
+  className,
+  layout
 }) {
   const image = (
     <Image
       src={src}
       alt={`Cover Image for ${title}`}
-      className='rounded-lg rounded-b-none'
-      layout='responsive'
+      className={`rounded-lg rounded-b-none ${className}`}
+      layout={`${layout ? layout : "responsive"}`}
       width={width}
       height={height}
+      objectFit='cover'
     />
   );
   return (

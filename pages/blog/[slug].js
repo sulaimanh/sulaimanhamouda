@@ -20,6 +20,8 @@ import Hr from "@/components/mdxComponents/hr";
 import Image from "next/image";
 import Layout from "../../components/layout";
 import Link from "next/link";
+import LinkInner from "@/components/mdxComponents/LinkInner";
+import LinkOuter from "@/components/mdxComponents/LinkOuter";
 import PostBody from "../../components/blog/post-body";
 import PostHeader from "../../components/blog/post-header";
 import PostTitle from "../../components/blog/post-title";
@@ -38,7 +40,8 @@ const components = {
   p: P,
   mp: MP,
   a: A,
-  Link: Link,
+  LinkOuter: LinkOuter,
+  LinkInner: LinkInner,
   ol: OL,
   ul: UL,
   hr: Hr,
