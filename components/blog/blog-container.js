@@ -66,13 +66,13 @@ export default function Index({ allPosts, sect, views }) {
           />
         </div>
       </div>
-      <div className='w-full flex justify-end'>
+      {/* <div className='w-full flex justify-end'>
         <MP>
           <Link href='/blog/welcome' passHref>
             <A blue>Read my Welcome post!</A>
           </Link>
         </MP>
-      </div>
+      </div> */}
       {heroPost && !search && (
         <HeroPost
           title={heroPost.title}

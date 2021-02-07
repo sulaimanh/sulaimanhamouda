@@ -26,7 +26,7 @@ export default function PostPreview({
   return (
     <div
       onClick={() => router.push(`/blog/${slug}`)}
-      className='transition duration-200 ease-in-out hover:shadow-sm p-5 rounded-lg cursor-pointer ring-1 ring-black ring-opacity-5'
+      className='transition duration-200 ease-in-out hover:shadow-sm rounded-lg cursor-pointer ring-2 ring-gray-100'
     >
       <div className='mb-5'>
         <CoverImage
@@ -38,24 +38,26 @@ export default function PostPreview({
           section={section}
         />
       </div>
-      <H3 className='mb-3'>
-        <Link href={`/blog/${slug}`}>
-          <a className='hover:underline'>{title}</a>
-        </Link>
-      </H3>
-      <div className='text-lg mb-4 flex justify-between'>
-        <DateFormatter dateString={date} />
-        <MP className='text-gray-500'>{views} views</MP>
-      </div>
-      <P className='mb-4'>{excerpt}</P>
-      <Avatar name={author.name} picture={author.picture} />
-      <div className='flex justify-end w-full'>
-        <P
-          className='text-blue-500 cursor-pointer hover:underline'
-          handler={() => router.push(`/blog/${slug}`)}
-        >
-          Read More <FontAwesomeIcon icon={faArrowCircleRight} />
-        </P>
+      <div className='p-5 pt-0'>
+        <H3 className='mb-3'>
+          <Link href={`/blog/${slug}`}>
+            <a className='hover:underline'>{title}</a>
+          </Link>
+        </H3>
+        <div className='text-lg mb-4 flex justify-between'>
+          <DateFormatter dateString={date} />
+          <MP className='text-gray-500'>{views} views</MP>
+        </div>
+        <P className='mb-4'>{excerpt}</P>
+        <Avatar name={author.name} picture={author.picture} />
+        <div className='flex justify-end w-full'>
+          <P
+            className='text-blue-500 cursor-pointer hover:underline'
+            handler={() => router.push(`/blog/${slug}`)}
+          >
+            Read More <FontAwesomeIcon icon={faArrowCircleRight} />
+          </P>
+        </div>
       </div>
     </div>
   );

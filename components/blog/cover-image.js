@@ -13,7 +13,7 @@ export default function CoverImage({
     <Image
       src={src}
       alt={`Cover Image for ${title}`}
-      className='rounded-lg'
+      className='rounded-lg rounded-b-none'
       layout='responsive'
       width={width}
       height={height}

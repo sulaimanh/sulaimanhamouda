@@ -27,17 +27,16 @@ export default function HeroPost({
     <section>
       <H2>Recent Post</H2>
       <hr className='my-5' />
-      <div className='mb-9'>
-        <CoverImage
-          title={title}
-          src={coverImage}
-          slug={slug}
-          height={620}
-          width={1240}
-          section={section}
-        />
-      </div>
-      <div className='mb-16 md:mb-16'>
+
+      <CoverImage
+        title={title}
+        src={coverImage}
+        slug={slug}
+        height={620}
+        width={1240}
+        section={section}
+      />
+      <div className='pt-9 p-5 rounded-lg rounded-t-none mb-16 md:mb-16 border-2 border-gray-100'>
         <div className='md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8'>
           <div>
             <H3 className='mb-4  lg:text-6xl'>
