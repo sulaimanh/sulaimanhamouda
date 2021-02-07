@@ -1,0 +1,41 @@
+{
+  "name": "sulaimanhamouda",
+  "version": "1.0.0",
+  "author": {
+    "name": "Sulaiman Hamouda",
+    "email": "hamouda.sulaiman@gmail.com",
+    "url": "https://sulaimanhamouda.com"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@mdx-js/react": "^1.6.22",
+    "date-fns": "2.16.1",
+    "firebase": "^8.2.6",
+    "firebase-admin": "^9.4.2",
+    "gray-matter": "4.0.2",
+    "mdx-prism": "^0.3.1",
+    "next": "latest",
+    "next-mdx-remote": "^2.1.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-query": "^3.6.0",
+    "reading-time": "^1.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.1",
+    "postcss": "^8.2.4",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^2.0.2",
+    "rehype": "^11.0.0"
+  },
+  "license": "MIT"
+}
