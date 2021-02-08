@@ -1,7 +1,7 @@
 import { mediumParagraph as MP, paragraph as P } from "@/components/text/text";
+import { faExpandAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 export default function Code({ children }) {
@@ -17,7 +17,7 @@ export default function Code({ children }) {
           <div className='z-50 justify-center items-center flex relative w-full bg-gray-100 px-5 m-3 md:m-10 rounded-lg overflow-scroll'>
             <div
               onClick={() => setLarge(!large)}
-              className='fixed top-10 right-10 md:top-16 md:right-16 cursor-pointer z-50 bg-gray-200 hover:bg-gray-300 rounded-lg px-5 py-3'
+              className='fixed top-10 right-10 md:top-16 md:right-16 cursor-pointer z-50 bg-gray-200 hover:bg-gray-300 rounded-lg px-3 py-1'
             >
               <FontAwesomeIcon
                 className=' text-black'
@@ -32,11 +32,13 @@ export default function Code({ children }) {
         </div>
       ) : null}
       <div className='bg-gray-100 px-5  my-10 overflow-scroll rounded-lg'>
-        <div
-          className='bg-gray-400 w-min rounded-lg cursor-pointer hover:bg-gray-300'
-          onClick={() => setLarge(!large)}
-        >
-          <MP className='text-white px-4 py-1'>Full screen</MP>
+        <div className='w-full flex justify-end'>
+          <div
+            className='bg-gray-200 hover:bg-gray-300 w-min px-3 py-1 mt-5 rounded-lg cursor-pointer '
+            onClick={() => setLarge(!large)}
+          >
+            <FontAwesomeIcon icon={faExpandAlt} />
+          </div>
         </div>
         <code>
           <MP>{children}</MP>

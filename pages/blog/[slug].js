@@ -11,7 +11,8 @@ import { orderedList as OL, unorderedList as UL } from "@/components/list/list";
 import { getAllPosts, getPostBySlug } from "../../lib/api";
 
 import Blockquote from "@/components/mdxComponents/blockquote";
-import Code from "@/components/mdxComponents/code";
+import CodeBlock from "@/components/mdxComponents/code-block";
+import CodeSnippet from "@/components/mdxComponents/code-snippet";
 import Comments from "@/components/blog/comments";
 import Container from "../../components/container";
 import ErrorPage from "next/error";
@@ -45,9 +46,10 @@ const components = {
   ol: OL,
   ul: UL,
   hr: Hr,
-  code: Code,
+  code: CodeBlock,
+  codesnippet: CodeSnippet,
   blockquote: Blockquote,
-  image: Image
+  Image
 };
 
 export default function Post({ frontMatter, source }) {

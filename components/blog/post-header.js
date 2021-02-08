@@ -31,8 +31,14 @@ export default function PostHeader({
         </div>
       </div>
 
-      <div className='mb-8 md:mb-16 sm:mx-0'>
-        <CoverImage title={title} src={coverImage} height={620} width={1240} />
+      <div className='mb-8 md:mb-16  max-w-4xl mx-auto'>
+        <CoverImage
+          className='rounded-b-lg'
+          title={title}
+          src={coverImage}
+          height={620}
+          width={1240}
+        />
       </div>
       <div className='max-w-2xl mx-auto'>
         <div className='block md:hidden mb-6 flex justify-between items-center'>

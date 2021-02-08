@@ -30,6 +30,10 @@ export default function Admin() {
   );
 
   const [sign, setSign] = useState({ email: "", password: "" });
+  const [description, setDescription] = useState({
+    status: "",
+    description: ""
+  });
   const mutate = useMutateCommentStatus();
 
   if (!user) {
@@ -96,6 +100,22 @@ export default function Admin() {
     );
   }
 
+  const submitDescriptionHandler = async () => {
+    const data = await fetcher("/api/upcoming", {
+      body: JSON.stringify({
+        description: description
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    });
+
+    console.log(data);
+
+    setDescription({ description: "", status: data.status });
+  };
+
   const handleButtonClick = (obj) => {
     mutate.mutate(obj);
   };
@@ -107,8 +127,7 @@ export default function Admin() {
       </Head>
       <Layout className='mx-5'>
         <div className='max-w-2xl mx-auto'>
-          <div className='flex justify-between items-center mb-5'>
-            <H4>Comments</H4>
+          <div className='flex justify-end mb-2'>
             <Button
               color='black'
               hoverColor='gray-800'
@@ -120,6 +139,35 @@ export default function Admin() {
             >
               Sign Out
             </Button>
+          </div>
+          <H4 className='mb-3'>Upcoming Description</H4>
+          <div className='flex flex-col w-full bg-gray-100 py-3 px-5 mb-5'>
+            <input
+              className='py-2 px-3 rounded-lg mb-2 focus:outline-none '
+              value={description.description}
+              onChange={(e) =>
+                setDescription({
+                  description: e.target.value,
+                  status: description.status
+                })
+              }
+              placeholder='Description'
+              type='text'
+            />
+            <MP className='text-center my-1 text-blue-500'>
+              {description.status}
+            </MP>
+            <Button
+              handler={submitDescriptionHandler}
+              color='black'
+              hoverColor='gray-800'
+              textColor='white'
+            >
+              Submit
+            </Button>
+          </div>
+          <div className='mb-5'>
+            <H4>Comments</H4>
           </div>
           {data.arr.map((post, index) => (
             <div

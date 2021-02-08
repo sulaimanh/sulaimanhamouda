@@ -26,7 +26,7 @@ export default function PostPreview({
   return (
     <div
       onClick={() => router.push(`/blog/${slug}`)}
-      className='transition duration-200 ease-in-out hover:shadow-sm rounded-lg cursor-pointer ring-2 ring-gray-100'
+      className='relative transition duration-200 ease-in-out hover:shadow-sm rounded-lg cursor-pointer ring-2 ring-gray-100'
     >
       <div className='mb-5'>
         <CoverImage
@@ -38,25 +38,33 @@ export default function PostPreview({
           section={section}
         />
       </div>
+
       <div className='p-5 pt-0'>
         <H3 className='mb-3'>
           <Link href={`/blog/${slug}`}>
             <a className='hover:underline'>{title}</a>
           </Link>
         </H3>
-        <div className='text-lg mb-4 flex justify-between'>
+        <div className='text-lg mb-4'>
           <DateFormatter dateString={date} />
           <MP className='text-gray-500'>{views} views</MP>
         </div>
-        <P className='mb-4'>{excerpt}</P>
-        <Avatar name={author.name} picture={author.picture} />
-        <div className='flex justify-end w-full'>
-          <P
-            className='text-blue-500 cursor-pointer hover:underline'
-            handler={() => router.push(`/blog/${slug}`)}
-          >
-            Read More <FontAwesomeIcon icon={faArrowCircleRight} />
-          </P>
+        <div className='mb-10'>
+          <P className='mb-2'>{excerpt}</P>
+          <div className='flex justify-end w-full'>
+            <MP
+              className='text-blue-500 cursor-pointer hover:underline'
+              handler={() => router.push(`/blog/${slug}`)}
+            >
+              Read More <FontAwesomeIcon icon={faArrowCircleRight} />
+            </MP>
+          </div>
+        </div>
+
+        <div className='absolute bottom-0'>
+          <div className='mb-5'>
+            <Avatar name={author.name} picture={author.picture} />
+          </div>
         </div>
       </div>
     </div>

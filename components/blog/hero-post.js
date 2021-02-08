@@ -50,17 +50,17 @@ export default function HeroPost({
             <MP className='text-gray-500'>{views} views</MP>
           </div>
           <div>
-            <P className='mb-4'>{excerpt}</P>
+            <P className='mb-1'>{excerpt}</P>
+            <div className='flex justify-end w-full'>
+              <MP className='text-blue-500 cursor-pointer hover:underline'>
+                <Link href={`/blog/${slug}`}>
+                  <A>
+                    Read More <FontAwesomeIcon icon={faArrowCircleRight} />
+                  </A>
+                </Link>
+              </MP>
+            </div>
             <Avatar name={author.name} picture={author.picture} />
-          </div>
-          <div className='flex justify-end w-full'>
-            <P className='text-blue-500 cursor-pointer hover:underline'>
-              <Link href={`/blog/${slug}`}>
-                <A>
-                  Read More <FontAwesomeIcon icon={faArrowCircleRight} />
-                </A>
-              </Link>
-            </P>
           </div>
         </div>
       </div>
