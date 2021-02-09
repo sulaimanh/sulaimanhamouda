@@ -5,6 +5,7 @@ import {
   mediumParagraph as MP,
   paragraph as P
 } from "@/components/text/text";
+import { useEffect, useState } from "react";
 
 import Container from "@/components/container";
 import Head from "next/head";
@@ -12,10 +13,22 @@ import Image from "next/image";
 import Layout from "@/components/layout";
 import Link from "next/link";
 import Subscribe from "@/components/subscribe/subscribe";
-import { useState } from "react";
+import fetcher from "@/lib/fetcher";
+import { useQuery } from "react-query";
 
 export default function About() {
   const [showSubscibe, setShowSubscibe] = useState(false);
+  // const { data } = useQuery(["views", slug], () =>
+  //   fetcher(`/api/views/${slug}`, {
+  //     method: "POST"
+  //   })
+  // );
+  useEffect(() => {
+    fetcher(`/api/views/about`, {
+      method: "POST"
+    });
+  }, []);
+
   return (
     <>
       <Head>

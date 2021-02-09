@@ -45,7 +45,7 @@ export default function PostPreview({
             <a className='hover:underline'>{title}</a>
           </Link>
         </H3>
-        <div className='text-lg mb-4'>
+        <div className='flex justify-between text-lg mb-4'>
           <DateFormatter dateString={date} />
           <MP className='text-gray-500'>{views} views</MP>
         </div>

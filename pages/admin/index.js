@@ -1,5 +1,6 @@
 import {
   headingQuaternary as H4,
+  headingQuinary as H5,
   mediumParagraph as MP,
   paragraph as P
 } from "@/components/text/text";
@@ -16,6 +17,19 @@ import { useState } from "react";
 
 export default function Admin() {
   const { user, signIn, signOut } = useAuth();
+  const views = useQuery(
+    ["views", "about"],
+    () =>
+      fetcher(`/api/views/about`, {
+        method: "GET"
+      }),
+    {
+      // - enabled is a boolean, so we are putting a double not to say true
+      // - we wont run this query until we have a user logged in
+      enabled: !!user
+    }
+  );
+
   const { data } = useQuery(
     "comments",
     () =>
@@ -140,6 +154,8 @@ export default function Admin() {
               Sign Out
             </Button>
           </div>
+          <H4>Page Views</H4>
+          <P className='mt-3 mb-10'>/about: {views.data.views}</P>
           <H4 className='mb-3'>Upcoming Description</H4>
           <div className='flex flex-col w-full bg-gray-100 py-3 px-5 mb-5'>
             <input

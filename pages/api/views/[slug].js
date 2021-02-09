@@ -22,9 +22,7 @@ export default async (req, res) => {
   }
 
   if (req.method === "GET") {
-    const snapshot = await firebase.collection("views").get();
-    return res
-      .status(200)
-      .json({ views: snapshot.docs.map((doc) => doc.data()) });
+    const doc = await firebase.collection("views").doc(req.query.slug).get();
+    return res.status(200).json({ ...doc.data() });
   }
 };
