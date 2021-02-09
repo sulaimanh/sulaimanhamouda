@@ -14,6 +14,7 @@ import Link from "next/link";
 import ModalHelper from "@/components/modal/modal";
 import Subscribe from "@/components/subscribe/subscribe";
 import { routes } from "@/lib/routes";
+import text from "@/locales/branding.json";
 import { useState } from "react";
 
 export default function Index() {
@@ -30,13 +31,13 @@ export default function Index() {
       />
       <Layout>
         <Head>
-          <title>sulaiman</title>
+          <title>{text.name}</title>
         </Head>
         <Container>
           <div className='flex md:mt-16 mt-10'>
             <div className='flex-row relative'>
               <H1 className='transition duration-500 ease-in-out hover:translate-x-96 '>
-                sulaiman
+                {text.name}
                 <Link passHref href='/admin'>
                   <A>.</A>
                 </Link>
@@ -70,27 +71,17 @@ export default function Index() {
               </div>
             ) : null}
             <div className='flex justify-center mt-5'>
-              <MP className='pr-2 hover:underline text-black opacity-50'>
-                <A outerLink href='https://github.com/sulaimanh'>
-                  github
-                </A>
-              </MP>
-              <MP className='pr-2 text-black opacity-50'>•</MP>
-              <MP className='pr-2 hover:underline text-black opacity-50'>
-                <A
-                  outerLink
-                  href='https://www.linkedin.com/in/sulaimanhamouda/'
-                >
-                  linkedin
-                </A>
-              </MP>
-              <MP className='pr-2 text-black opacity-50'>•</MP>
-              <MP className='pr-2 hover:underline text-black opacity-50'>
-                <A outerLink href='https://twitter.com/sulaimanhamouda'>
-                  twitter
-                </A>
-              </MP>
-              <MP className='pr-2 text-black opacity-50'>•</MP>
+              {text.social.map((s, index) => (
+                <div key={index} className='flex'>
+                  <MP className='pr-2 hover:underline text-black opacity-50'>
+                    <A outerLink href={s.link}>
+                      {s.name}
+                    </A>
+                  </MP>
+                  <MP className='pr-2 text-black opacity-50'>•</MP>
+                </div>
+              ))}
+
               <MP
                 handler={() => setShowSubscribe(!showSubscribe)}
                 className='pr-2 hover:underline cursor-pointer text-black opacity-50'

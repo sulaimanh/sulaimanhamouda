@@ -14,20 +14,22 @@ import Layout from "@/components/layout";
 import Link from "next/link";
 import Subscribe from "@/components/subscribe/subscribe";
 import fetcher from "@/lib/fetcher";
+import { useAuth } from "@/lib/hooks/useAuth";
 import { useQuery } from "react-query";
 
 export default function About() {
   const [showSubscibe, setShowSubscibe] = useState(false);
-  // const { data } = useQuery(["views", slug], () =>
-  //   fetcher(`/api/views/${slug}`, {
-  //     method: "POST"
-  //   })
-  // );
-  useEffect(() => {
-    fetcher(`/api/views/about`, {
-      method: "POST"
-    });
-  }, []);
+  const { user, loading } = useAuth();
+  const data = useQuery(
+    ["views", "about"],
+    () =>
+      fetcher(`/api/views/about`, {
+        method: "POST"
+      }),
+    {
+      enabled: !loading && !user
+    }
+  );
 
   return (
     <>

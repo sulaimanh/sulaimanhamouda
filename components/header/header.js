@@ -13,6 +13,7 @@ import Link from "next/link";
 import ModalHelper from "@/components/modal/modal";
 import Support from "@/components/support/support";
 import { routes } from "@/lib/routes";
+import text from "@/locales/branding.json";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -27,7 +28,7 @@ export default function Header() {
   const sectionArr = router.asPath.split("/");
   const section = sectionArr[1] ? sectionArr[1] : "";
 
-  const title = `sulaiman${section && ":" + section}`;
+  const title = `${text.name}${section && ":" + section}`;
   const url = `/${section && section}`;
 
   return (
@@ -75,7 +76,7 @@ export default function Header() {
           <>
             <div className='flex flex-col mb-10 bg-white w-full z-50'>
               <div className='flex justify-between mb-4'>
-                <H4>menu</H4>
+                <H4>Menu</H4>
                 <div className='cursor-pointer' onClick={() => setMenu(!menu)}>
                   <FontAwesomeIcon icon={faTimes} size='1x' />
                 </div>
