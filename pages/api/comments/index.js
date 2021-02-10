@@ -13,7 +13,7 @@ export default async function handler(req, res) {
             {
               slug: slug,
               name: isAdmin ? "Sulaiman Hamouda (Author)" : name,
-              social: social,
+              social: isAdmin ? "https://twitter.com/sulaimanhamouda" : social,
               message: message,
               status: isAdmin ? "APPROVED" : "NEEDS APPROVAL",
               date: today,
