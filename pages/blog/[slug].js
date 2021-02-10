@@ -96,8 +96,8 @@ export default function Post({ frontMatter, source }) {
               <H3>Did you enjoy reading this post?</H3>
               <P className='mt-5'>
                 Please consider sharing this with anyone who may benefit. Also,
-                please leave a comment in the comment section below. I would
-                love to hear any feedback you may have.
+                please leave a comment below. I would love to hear any feedback
+                you may have and connect with you.
               </P>
             </div>
 

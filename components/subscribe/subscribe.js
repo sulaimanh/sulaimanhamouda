@@ -4,18 +4,27 @@ import {
   paragraph as P
 } from "@/components/text/text";
 import { faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import fetcher from "@/lib/fetcher";
 import { useQuery } from "react-query";
-import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Subscribe({ show, handler, className }) {
   const [status, setStatus] = useState({ state: "", message: "" });
   const [email, setEmail] = useState("");
+  const textInput = useRef();
+  const router = useRouter();
   const { data } = useQuery("subscribers", () =>
     fetcher("/api/subscribe/subscribers")
   );
+
+  useEffect(() => {
+    if (router.pathname === "/") {
+      textInput.current.focus();
+    }
+  }, []);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -75,6 +84,7 @@ export default function Subscribe({ show, handler, className }) {
                 tutorial updates, and other cool stuff.
               </P>
               <input
+                ref={textInput}
                 onChange={(e) => setEmail(e.target.value)}
                 className='p-2 pl-3 my-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent'
                 type='email'

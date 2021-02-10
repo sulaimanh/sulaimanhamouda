@@ -2,21 +2,20 @@ import { FieldValue, ServerValue, firebase } from "@/lib/firebase";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { social, message, name, slug, today, time } = req.body;
+    const { social, message, name, slug, today, time, isAdmin } = req.body;
 
     const docRef = firebase.collection("comments").doc(slug);
     await firebase.runTransaction(async (transaction) => {
       const doc = await transaction.get(docRef);
-
       if (!doc.exists) {
-        await docRef.set({
+        transaction.set(docRef, {
           comments: [
             {
               slug: slug,
-              name: name,
+              name: isAdmin ? "Sulaiman Hamouda (Author)" : name,
               social: social,
               message: message,
-              status: "NEEDS APPROVAL",
+              status: isAdmin ? "APPROVED" : "NEEDS APPROVAL",
               date: today,
               timestamp: time
             }
@@ -26,19 +25,18 @@ export default async function handler(req, res) {
         transaction.update(docRef, {
           comments: FieldValue.arrayUnion({
             slug: slug,
-            name: name,
+            name: isAdmin ? "Sulaiman Hamouda (Author)" : name,
             social: social,
             message: message,
-            status: "NEEDS APPROVAL",
+            status: isAdmin ? "APPROVED" : "NEEDS APPROVAL",
             date: today,
             timestamp: time
           })
         });
       }
-      return;
     });
 
-    res.status(200).json({ error: "" });
+    return res.status(200).json({ error: "" });
   }
 
   if (req.method === "GET") {

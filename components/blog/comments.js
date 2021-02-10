@@ -12,6 +12,7 @@ import DateFormatter from "@/components/date-formatter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import fetcher from "@/lib/fetcher";
+import { useAuth } from "@/lib/hooks/useAuth";
 import { useQuery } from "react-query";
 import { useState } from "react";
 
@@ -21,6 +22,7 @@ export default function Comments({ slug }) {
     social: "",
     message: ""
   });
+  const { user } = useAuth();
   const [status, setStatus] = useState({ state: "", message: "" });
   const { data } = useQuery(["comments", slug], () =>
     fetcher("/api/comments", {
@@ -55,7 +57,8 @@ export default function Comments({ slug }) {
         message: form.message,
         slug: slug,
         today: today,
-        time: new Date().getTime()
+        time: new Date().getTime(),
+        isAdmin: user
       }),
       headers: {
         "Content-Type": "application/json"
@@ -63,19 +66,21 @@ export default function Comments({ slug }) {
       method: "POST"
     });
 
-    const f = e.target;
-    const data = new FormData(f);
-    const xhr = new XMLHttpRequest();
-    xhr.open(f.method, f.action);
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (xhr.status === 200) {
-        f.reset();
-      } else {
-      }
-    };
-    xhr.send(data);
+    if (!user) {
+      const f = e.target;
+      const data = new FormData(f);
+      const xhr = new XMLHttpRequest();
+      xhr.open(f.method, f.action);
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status === 200) {
+          f.reset();
+        } else {
+        }
+      };
+      xhr.send(data);
+    }
 
     const { error } = res;
     if (error) {
@@ -140,7 +145,7 @@ export default function Comments({ slug }) {
       >
         <H3 className='mb-5'>Leave a comment</H3>
         <MP className='text-center'>
-          Submit one of your social media accounts and lets connect. (not
+          Submit one of your social media accounts and lets connect (not
           required to leave a comment)
         </MP>
         <input
@@ -152,7 +157,7 @@ export default function Comments({ slug }) {
             })
           }
           value={form.name}
-          required
+          required={user ? false : true}
           type='text'
           name='name'
           placeholder='*Name'
