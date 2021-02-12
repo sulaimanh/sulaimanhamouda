@@ -17,8 +17,9 @@ import Comments from "@/components/blog/comments";
 import Container from "../../components/container";
 import ErrorPage from "next/error";
 import Head from "next/head";
+import Highlight from "@/components/mdxComponents/highlight";
 import Hr from "@/components/mdxComponents/hr";
-import Image from "next/image";
+import Image from "@/components/mdxComponents/image";
 import Layout from "../../components/layout";
 import Link from "next/link";
 import LinkInner from "@/components/mdxComponents/LinkInner";
@@ -26,9 +27,12 @@ import LinkOuter from "@/components/mdxComponents/LinkOuter";
 import PostBody from "../../components/blog/post-body";
 import PostHeader from "../../components/blog/post-header";
 import PostTitle from "../../components/blog/post-title";
+import Section from "@/components/mdxComponents/section";
 import Subscribe from "@/components/subscribe/subscribe";
+import TableOfContents from "@/components/mdxComponents/tableofcontents";
+import Tag from "@/components/mdxComponents/tag";
+import background from "@/components/mdxComponents/background";
 import hydrate from "next-mdx-remote/hydrate";
-import mdxPrism from "mdx-prism";
 import readingTime from "reading-time";
 import renderToString from "next-mdx-remote/render-to-string";
 import { useRouter } from "next/router";
@@ -49,7 +53,12 @@ const components = {
   code: CodeBlock,
   codesnippet: CodeSnippet,
   blockquote: Blockquote,
-  Image
+  image: Image,
+  background: background,
+  highlight: Highlight,
+  section: Section,
+  TableOfContents: TableOfContents,
+  Tag: Tag
 };
 
 export default function Post({ frontMatter, source }) {
@@ -129,10 +138,7 @@ export async function getStaticProps({ params }) {
   ]);
 
   const mdxSource = await renderToString(post.content, {
-    components,
-    mdxOptions: {
-      rehypePlugins: [mdxPrism]
-    }
+    components
   });
 
   return {

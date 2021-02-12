@@ -25,6 +25,8 @@
     "mdx-prism": "^0.3.1",
     "next": "latest",
     "next-mdx-remote": "^2.1.1",
+    "parse-numeric-range": "^0.0.2",
+    "prism-react-renderer": "^1.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-query": "^3.6.0",
@@ -34,8 +36,8 @@
     "autoprefixer": "^10.2.1",
     "postcss": "^8.2.4",
     "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^2.0.2",
-    "rehype": "^11.0.0"
+    "rehype": "^11.0.0",
+    "tailwindcss": "^2.0.2"
   },
   "license": "MIT"
 }

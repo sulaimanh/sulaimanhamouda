@@ -28,7 +28,7 @@ export default function Header() {
   const sectionArr = router.asPath.split("/");
   const section = sectionArr[1] ? sectionArr[1] : "";
 
-  const title = `${text.name}${section && ":" + section}`;
+  const title = `${text.headerName}${section && ":" + section}`;
   const url = `/${section && section}`;
 
   return (
@@ -36,7 +36,7 @@ export default function Header() {
       className={`${
         menu
           ? "fixed top-0 z-40 w-full left-0 bg-white"
-          : "sticky top-0 z-40 bg-white bg-opacity-90 mb-5"
+          : "sticky top-0 z-40 bg-white bg-opacity-95 mb-5"
       } `}
     >
       <Container>

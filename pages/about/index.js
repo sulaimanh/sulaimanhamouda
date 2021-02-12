@@ -50,10 +50,11 @@ export default function About() {
               />
             </div>
             <P>
-              Hey there, it is great to meet you! I'm Sulaiman. Some people know
-              me as Sulai, Sully, King Sulaiman, Sulai the Great, Sulai the
-              Magnificent.... Okay, they may not call me all of those names 😂.
-              I am a husband, a learner, a developer, and a writer.
+              Hey there, it is great to meet you! I'm Sulaiman (sue-lay-man).
+              Some people know me as Sulai, Sully, King Sulaiman, Sulai the
+              Great, Sulai the Magnificent.... Okay, they may not call me all of
+              those names 😂. I am a husband, a learner, a developer, and a
+              writer.
             </P>
             <br />
             <hr className='my-10 mt-5' />

@@ -155,7 +155,7 @@ export default function Admin() {
             </Button>
           </div>
           <H4>Page Views</H4>
-          <P className='mt-3 mb-10'>/about: {views.data.views}</P>
+          <P className='mt-3 mb-10'>/about: {views?.data.views}</P>
           <H4 className='mb-3'>Upcoming Description</H4>
           <div className='flex flex-col w-full bg-gray-100 py-3 px-5 mb-5'>
             <input

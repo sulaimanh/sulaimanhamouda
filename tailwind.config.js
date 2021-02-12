@@ -1,4 +1,3 @@
-const { spacing, fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = {
   purge: ["./pages/**/*.js", "./components/**/*.js", "./layouts/**/*.js"],
   theme: {
@@ -10,7 +9,7 @@ module.exports = {
         success: "#0070f3",
         cyan: "#79FFE1",
         support: "#3BE47A",
-        orange: "#FFD17E",
+        orange: "#ffd56b",
         codeBackground: "#15202B",
         background: "#f0e5d8"
       },
