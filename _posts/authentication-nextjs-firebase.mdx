@@ -1,0 +1,206 @@
+---
+title: "Authenticating with Next.js, Firebase, Formik and Yup"
+section: "programming"
+excerpt: "Authentication is something everyone has trouble with in the beginning."
+coverImage: "/assets/blog/posts/firebase-authentication/authentication.jpg"
+date: "2021-02-07"
+isSubmitted: "false"
+author:
+  name: Sulaiman H.
+  picture: "/assets/blog/authors/sulaiman.jpg"
+ogImage:
+  url: "/assets/blog/posts/firebase-authentication/authentication.jpg"
+---
+
+Today, I will be showing you how to implement authentication using Firebase. In the next couple of posts, I will review some concepts in Firebase, like Authentication, Firestore, Cloud Functions, and more. I will show you some examples of things we can do with these technologies, such as connecting Firebase Cloud Functions with Telegram in order to send messages automatically. This is something I have implemented on this website. Since I have to monitor comments which are left on my posts, I have set up a cloud function which communicates with Telegram. It notifies me of new comments and allows me to approve or deny comments. It also notifies me of new subscribers to my newsletter.
+
+<TableOfContents
+  contents={[
+    { title: "Why do I need Authentication", id: "why-authentication" },
+    { title: "Getting Started", id: "getting-started" },
+    { title: "Overview", id: "overview" },
+    { title: "Sections", id: "sections" },
+    { title: "Project Setup", id: "project-setup" },
+    { title: "Starting with the UI", id: "starting-with-ui" }
+  ]}
+/>
+
+## Firebase Authentication
+
+Authentication is something I had a little trouble with when I first started with React.js.
+There are a lot of authentication providers out there which you can choose from. Here are a few:
+
+- <LinkOuter href='https://firebase.google.com/docs/auth/web/start'>
+    Firebase
+  </LinkOuter>
+- <LinkOuter href='https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/'>
+    OAuth
+  </LinkOuter>
+- <LinkOuter href='https://next-auth.js.org/'>NextAuth.js</LinkOuter>
+
+Today, we are going to review how to get started with authentication through firebase. Firebase provides an easy and quick way to get started with authentication. They also provide different sign in methods (Google, GitHub, Twitter, Facebook, and more).
+
+<Tag title='Why do I need Authentication?' id='why-authentication' />
+
+Authentication allows you to prevent users from accessing pages/information which they are not supposed to access. On this website, I have an admin portal. Here, I am able to view and perform tasks which I should only be able to perform. Thus, I have set up an admin route which requires authentication. Even though I get notified on Telegram about new comments, I also wanted to have the ability to review all comments directly on my blog. Without making this <codesnippet>/admin</codesnippet> route a protected one, anyone would be able to access this page. You can visit the page here <LinkInner href="/admin"><codesnippet>/admin</codesnippet></LinkInner>.
+
+<Tag title='Getting Started' id='getting-started' />
+
+Before we can get started, you have to set up an account with Firebase. If you need help setting up Firebase, please read my <LinkInner href="/blog/setting-up-firebase">Setting up Firebase</LinkInner> blog post.
+
+<Tag title='Overview' id='overview' />
+
+We are going to build a basic application which implements authentication using Firebase with Next.js. In the process, we are going to implement other cool and helpful libraries.
+
+- <LinkOuter href='https://tailwindcss.com/'>Tailwindcss</LinkOuter> - CSS framework
+- <LinkOuter href='https://formik.org/'>Formik</LinkOuter> - Form builder
+- <LinkOuter href='https://github.com/jquense/yup'>Yup</LinkOuter> - Object schema
+  validation
+
+By the end of this article, we will understand how each one of them work together and you will be able to start implementing authentication in your own applications.
+
+<Tag title='Sections' id='sections' />
+
+<section id="project-setup" section="Project Setup">
+
+<Tag title='Project Setup' id='project-setup' />
+
+You can pull the starting code <LinkOuter href="https://github.com/sulaimanh/authentication-firebase/tree/dc8d1e8af27086371b9a0dae652f5599821ba88a">here.</LinkOuter> It has all of the necessary packages already installed.
+
+We first started by running <codesnippet><LinkOuter href="https://nextjs.org/docs/api-reference/create-next-app">npx create-next-app [any name you want]</LinkOuter></codesnippet>. This will help us get a Next.js application running.
+
+<background text='This is what we see when we run npm run dev. We are going to get rid of all of this code that Next.js generated for us.'>
+  <image
+    src='/assets/blog/posts/firebase-authentication/create-next.jpg'
+    alt='npm run dev Image'
+  />
+</background>
+
+Now, we have to install the necessary packages.
+
+- <LinkOuter href='https://tailwindcss.com/docs/guides/nextjs'>
+    <codesnippet>
+      npm install tailwindcss@latest postcss@latest autoprefixer@latest
+    </codesnippet>
+    <br />
+    <codesnippet>npx tailwindcss init -p</codesnippet>
+  </LinkOuter>
+  <br />
+- <LinkOuter href='https://formik.org/docs/overview#npm'>
+    <codesnippet> npm install formik --save</codesnippet>
+  </LinkOuter>
+  <br />
+- <LinkOuter href='https://github.com/jquense/yup#install'>
+    <codesnippet> npm install -S yup</codesnippet>
+  </LinkOuter>
+
+Since we are using Tailwindcss with Next.js, there are some extra configurations which we have to set up. Please visit this <LinkOuter href="https://tailwindcss.com/docs/guides/nextjs#configure-tailwind-to-remove-unused-styles-in-production">link</LinkOuter> to do just that. If you want to save time or if you are having trouble setting the project up, you can pull the starting code from <LinkOuter href="https://github.com/sulaimanh/authentication-firebase/tree/dc8d1e8af27086371b9a0dae652f5599821ba88a">here.</LinkOuter>
+
+</section>
+
+<section id="starting-with-ui" section="Starting with the UI">
+
+<Tag title='Starting with the UI' id='starting-with-ui' />
+
+Before we actually set up authentication, lets design the sign in/up form. Here, we will see tailwindcss shine. Writing CSS just got a lot easier. You can <LinkOuter href="https://tailwindcss.com/">visit</LinkOuter> their website to get a better understanding.
+
+<background text='This is what we will be designing.'>
+  <image
+    src='/assets/blog/posts/firebase-authentication/ui.jpg'
+    alt='npm run dev Image'
+    height='1000'
+    width='1500'
+  />
+</background>
+
+Since this is a post about authentication and not tailwinds, I am not going to explain everything I do. I will primarily go through the structure and flow.
+
+Right now, our root page, <codesnippet>pages/index.js</codesnippet>, should be empty. Something like this:
+
+```jsx:src/components/code.js
+// pages/index.js
+
+export default function Home() {
+  return <div>Welcome</div>;
+}
+```
+
+This is the general structure of our sign in/up form. Notice how we are not handling state for our form. We will be using Formik to implement that. We will also use Yup in order to validate the users input.
+
+```jsx:src/components/code.js
+// pages/index.js
+
+import Head from "next/head";
+
+export default function Home() {
+  return (
+    <div className='mx-auto px-5 min-h-screen sm:px-10 flex flex-col items-center mt-24 '>
+      <Head>
+        <title>Super Secret Website</title>
+      </Head>
+
+      <p className='mb-5 text-center'>
+        Utilizing Next.js, Firebase Authentication, Tailwindscss, Formik, Yup
+      </p>
+
+      <div className='w-max bg-gray-200 p-7 rounded-lg shadow-lg mb-10'>
+        <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight mb-5'>
+          Super Secret Website
+        </h1>
+
+        <h2 className='text-center text-xl mb-3'>Sign Up</h2>
+
+        <form className='flex flex-col'>
+          <div className='flex flex-col w-full mb-3'>
+            <input
+              placeholder='Email'
+              className={`focus:outline-none focus:ring-2 focus:ring-blue-500 px-3 py-2 rounded-md`}
+            />
+          </div>
+
+          <div className='flex flex-col w-full mb-3'>
+            <input
+              placeholder='Password'
+              className={`focus:outline-none focus:ring-2 focus:ring-blue-500 px-3 py-2 rounded-md`}
+            />
+          </div>
+
+          <div className='flex flex-col w-full mb-3'>
+            <input
+              placeholder='Confirm Password'
+              className={`focus:outline-none focus:ring-2 focus:ring-blue-500 px-3 py-2 rounded-md`}
+            />
+          </div>
+
+          <button
+            type='submit'
+            className='w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 hover:shadow-lg'
+          >
+            Submit
+          </button>
+        </form>
+
+        <div className='w-full flex justify-center items-center mt-3'>
+          <hr className='border-gray-500 w-full' />
+
+          <p className='text-md sm:text-lg w-max px-3 leading-relaxed'>or</p>
+
+          <hr className='border-gray-500 w-full' />
+        </div>
+
+        <div className='flex flex-col justify-between items-center mt-3 w-full'>
+          <p className='w-max text-center rounded-lg text-md sm:text-lg leading-relaxed hover:underline cursor-pointer'>
+            Sign In
+          </p>
+
+          <p className='text-xs text-blue-500 mt-3 cursor-pointer hover:underline'>
+            Forgot Password?
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+</section>
