@@ -1,11 +1,11 @@
 import Highlight, { defaultProps } from "prism-react-renderer";
 import { faExpandAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediumParagraph as MP } from "@/components/text/text";
 import React from "react";
 import theme from "@/components/blog/theme";
-import { useState } from "react";
 
 const getParams = (className = ``) => {
   const [lang = ``, params = ``] = className.split(`:`);
@@ -31,11 +31,22 @@ const calculateLinesToHighlight = (meta) => {
 };
 
 export default function Code({ children, className, metastring }) {
+  const [large, setLarge] = useState(false);
+
+  useEffect(() => {
+    const x = document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && large) {
+        setLarge(!large);
+      }
+    });
+
+    return () => document.removeEventListener("keydown", x);
+  });
+
   const [language, title] = getParams(className);
 
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
 
-  const [large, setLarge] = useState(false);
   return (
     <>
       {large ? (
@@ -44,12 +55,12 @@ export default function Code({ children, className, metastring }) {
             onClick={() => setLarge(!large)}
             className='cursor-pointer fixed z-30 w-screen h-screen bg-gray-600 opacity-75'
           ></div>
-          <div
+          <button
             onClick={() => setLarge(!large)}
             className='fixed top-10 right-10 md:top-16 md:right-16 cursor-pointer z-50 bg-gray-200 hover:bg-gray-300 rounded-lg px-3 py-1'
           >
             <FontAwesomeIcon className=' text-black' icon={faTimes} size='1x' />
-          </div>
+          </button>
           <Highlight
             {...defaultProps}
             theme={theme}
@@ -69,6 +80,9 @@ export default function Code({ children, className, metastring }) {
                   }
                   return (
                     <div key={i} {...lineProps}>
+                      <span className='ml-1 mr-5 text-white text-opacity-30'>
+                        {i + 1}
+                      </span>
                       {line.map((token, key) => (
                         <span key={key} {...getTokenProps({ token, key })} />
                       ))}
@@ -109,6 +123,9 @@ export default function Code({ children, className, metastring }) {
               }
               return (
                 <div key={i} {...lineProps}>
+                  <span className='ml-1 mr-5 text-white text-opacity-30'>
+                    {i + 1}
+                  </span>
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
