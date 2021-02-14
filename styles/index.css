@@ -17,3 +17,7 @@ html {
   margin-right: -1em;
   margin-left: -0.3em;
 }
+
+.title:hover > .paperclip {
+  display: flex;
+}
