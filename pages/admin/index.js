@@ -185,58 +185,62 @@ export default function Admin() {
           <div className='mb-5'>
             <H4>Comments</H4>
           </div>
-          {data.arr.map((post, index) => (
-            <div
-              key={index}
-              className='w-full p-5 rounded-lg shadow-sm mb-5 border border-2 border-gray-200'
-            >
-              <div className='flex justify-between items-center'>
-                <H4>{post.slug}</H4>
-                {post.status === "NEEDS APPROVAL" ? (
-                  <Button
-                    handler={() =>
-                      handleButtonClick({
-                        slug: post.slug,
-                        status: "APPROVED",
-                        timestamp: post.timestamp
-                      })
-                    }
-                    textColor='red-500'
-                    hoverTextColor='white'
-                    hoverBorderColor='green-500'
-                    hoverColor='green-500'
-                    borderColor='red-600'
-                  >
-                    Needs Approval
-                  </Button>
-                ) : (
-                  <Button
-                    handler={() =>
-                      handleButtonClick({
-                        slug: post.slug,
-                        status: "NEEDS APPROVAL",
-                        timestamp: post.timestamp
-                      })
-                    }
-                    textColor='green-500'
-                    hoverTextColor='white'
-                    borderColor='green-500'
-                    hoverBorderColor='red-600'
-                    hoverTextColor='white'
-                    hoverColor='red-600'
-                  >
-                    Approved
-                  </Button>
-                )}
-              </div>
-              <MP>{post.name}</MP>
-              <MP>{post.social}</MP>
-              <MP>
-                <DateFormatter dateString={post.date} />
-              </MP>
-              <P className='mt-3'>{post.message}</P>
-            </div>
-          ))}
+          {data.arr.map((post, index) => {
+            {
+              return post.status === "NEEDS APPROVAL" ? (
+                <div
+                  key={index}
+                  className='w-full p-5 rounded-lg shadow-sm mb-5 border border-2 border-gray-200'
+                >
+                  <div className='flex justify-between items-center'>
+                    <H4>{post.slug}</H4>
+                    {post.status === "NEEDS APPROVAL" ? (
+                      <Button
+                        handler={() =>
+                          handleButtonClick({
+                            slug: post.slug,
+                            status: "APPROVED",
+                            timestamp: post.timestamp
+                          })
+                        }
+                        textColor='red-500'
+                        hoverTextColor='white'
+                        hoverBorderColor='green-500'
+                        hoverColor='green-500'
+                        borderColor='red-600'
+                      >
+                        Needs Approval
+                      </Button>
+                    ) : (
+                      <Button
+                        handler={() =>
+                          handleButtonClick({
+                            slug: post.slug,
+                            status: "NEEDS APPROVAL",
+                            timestamp: post.timestamp
+                          })
+                        }
+                        textColor='green-500'
+                        hoverTextColor='white'
+                        borderColor='green-500'
+                        hoverBorderColor='red-600'
+                        hoverTextColor='white'
+                        hoverColor='red-600'
+                      >
+                        Approved
+                      </Button>
+                    )}
+                  </div>
+                  <MP>{post.name}</MP>
+                  <MP>{post.social}</MP>
+                  <MP>
+                    <DateFormatter dateString={post.date} />
+                  </MP>
+                  <P className='mt-3'>{post.message}</P>
+                </div>
+              ) : null;
+            }
+          })}
         </div>
       </Layout>
     </>

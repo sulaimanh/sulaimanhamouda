@@ -10,6 +10,7 @@ module.exports = {
         cyan: "#79FFE1",
         support: "#3BE47A",
         orange: "#ffd56b",
+        orangeDark: "#e27802",
         codeBackground: "#15202B",
         background: "#f0e5d8"
       },
