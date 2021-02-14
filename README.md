@@ -8,5 +8,6 @@ This is my personal site. Read my [Welcome Post](https://sulaimanhamouda.com/blo
 - React.js
 - MDX
 - Firebase
+- React Query
 - Tailwind CSS
 - [Telegram Bot](https://github.com/sulaimanh/sulaimanhamouda/tree/master/telegram-bot)
