@@ -7,6 +7,7 @@ import { faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Input from "@/components/input/input";
 import fetcher from "@/lib/fetcher";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
@@ -19,6 +20,8 @@ export default function Subscribe({ show, handler, className }) {
   const { data } = useQuery("subscribers", () =>
     fetcher("/api/subscribe/subscribers")
   );
+
+  console.log(email);
 
   useEffect(() => {
     if (router.pathname === "/") {
@@ -83,14 +86,13 @@ export default function Subscribe({ show, handler, className }) {
                 Subscribe to my newsletter to receive updates on new blog posts,
                 tutorial updates, and other cool stuff.
               </P>
-              <input
+              <Input
                 ref={textInput}
-                onChange={(e) => setEmail(e.target.value)}
-                className='p-2 pl-3 my-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent'
+                handler={(e) => setEmail(e.target.value)}
                 type='email'
                 name='_replyto'
                 placeholder='example@example.com'
-                required
+                required={true}
               />
               <button
                 disabled={status.state === "LOADING" ? true : false}
@@ -109,12 +111,14 @@ export default function Subscribe({ show, handler, className }) {
                     <MP>Thank you for signing up!</MP>
                     <MP>
                       You will start to receive emails from{" "}
-                      <b>hamouda.sulaiman@gmail.com</b>
+                      <b>sulaiman@sulaimanhamouda.com</b>
                     </MP>
                   </div>
                 )}
                 {status.state === "ERROR" && (
-                  <MP className='text-red-600 font-bold'>{status.message}</MP>
+                  <MP className='text-red-600 font-bold text-center'>
+                    {status.message}
+                  </MP>
                 )}
               </div>
             </form>

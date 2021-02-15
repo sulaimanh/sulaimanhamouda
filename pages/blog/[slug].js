@@ -9,8 +9,9 @@ import {
 } from "../../components/text/text";
 import { orderedList as OL, unorderedList as UL } from "@/components/list/list";
 import { getAllPosts, getPostBySlug } from "../../lib/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import Background from "@/components/mdxComponents/background";
 import Blockquote from "@/components/mdxComponents/blockquote";
 import CodeBlock from "@/components/mdxComponents/code-block";
 import CodeSnippet from "@/components/mdxComponents/code-snippet";
@@ -22,6 +23,7 @@ import Head from "next/head";
 import Highlight from "@/components/mdxComponents/highlight";
 import Hr from "@/components/mdxComponents/hr";
 import Image from "@/components/mdxComponents/image";
+import Input from "@/components/input/input";
 import Layout from "../../components/layout";
 import Link from "next/link";
 import LinkInner from "@/components/mdxComponents/LinkInner";
@@ -35,7 +37,6 @@ import Section from "@/components/mdxComponents/section";
 import Subscribe from "@/components/subscribe/subscribe";
 import TableOfContents from "@/components/mdxComponents/tableofcontents";
 import Tag from "@/components/mdxComponents/tag";
-import background from "@/components/mdxComponents/background";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import hydrate from "next-mdx-remote/hydrate";
 import readingTime from "reading-time";
@@ -60,11 +61,12 @@ const components = {
   codesnippet: CodeSnippet,
   blockquote: Blockquote,
   image: Image,
-  background: background,
+  Background,
   highlight: Highlight,
   section: Section,
   TableOfContents: TableOfContents,
-  Tag: Tag
+  Tag: Tag,
+  Input
 };
 
 export default function Post({ frontMatter, source }) {
@@ -73,16 +75,15 @@ export default function Post({ frontMatter, source }) {
     scroll: false,
     exit: false
   });
+  const contentRef = useRef(null);
   const router = useRouter();
   const content = hydrate(source, { components });
 
   useEffect(() => {
     const progressBar = () => {
       const totalScroll = document.documentElement.scrollTop;
-      const windowHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const s = `${totalScroll / windowHeight}`;
+
+      const s = `${totalScroll / (contentRef.current?.offsetHeight + 1250)}`;
       if (s * 100 > 5 && !showSubscribe.scroll) {
         setShowSubscribe({ scroll: true, exit: showSubscribe.exit });
       }
@@ -105,7 +106,7 @@ export default function Post({ frontMatter, source }) {
           showSubscribe.scroll && !showSubscribe.exit
             ? "animate-fromBottom fixed bottom-5 right-0 "
             : "hidden"
-        } z-40 mx-5 w-12/12 md:w-6/12 lg:w-4/12`}
+        }  z-40 mx-5 w-12/12 md:w-6/12 lg:w-4/12`}
       >
         <div className='w-full flex justify-end'>
           <FontAwesomeIcon
@@ -117,7 +118,9 @@ export default function Post({ frontMatter, source }) {
             className='mr-4 mb-2 cursor-pointer hover:text-gray-700'
           />
         </div>
-        <Subscribe />
+        <div className='shadow-md'>
+          <Subscribe />
+        </div>
       </div>
       <Container>
         {router.isFallback ? (
@@ -139,7 +142,7 @@ export default function Post({ frontMatter, source }) {
                 slug={frontMatter.slug}
               />
               <div className='max-w-2xl mx-auto'>
-                <PostBody content={content} />
+                <PostBody ref={contentRef} content={content} />
                 <br />
                 <br />
                 <P className='font-bold'>Thank you for reading,</P>

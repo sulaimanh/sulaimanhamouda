@@ -80,13 +80,16 @@ export default function Code({ children, className, metastring }) {
                   }
                   return (
                     <div key={i} {...lineProps}>
-                      <span className='ml-1 mr-5 text-white text-opacity-30'>
-                        {i + 1}
-                      </span>
-
-                      {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({ token, key })} />
-                      ))}
+                      <div className='relative'>
+                        <span className='absolute w-3 left-0 flex justify-end text-white text-opacity-30'>
+                          {i + 1}
+                        </span>
+                      </div>
+                      <div className='ml-8'>
+                        {line.map((token, key) => (
+                          <span key={key} {...getTokenProps({ token, key })} />
+                        ))}
+                      </div>
                     </div>
                   );
                 })}
@@ -119,7 +122,7 @@ export default function Code({ children, className, metastring }) {
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
-            className={`${className} px-5  overflow-scroll rounded-b-lg text-sm`}
+            className={`${className} overflow-scroll rounded-b-lg text-sm`}
             style={{ ...style, padding: "20px" }}
           >
             {tokens.map((line, i) => {
@@ -130,12 +133,16 @@ export default function Code({ children, className, metastring }) {
               }
               return (
                 <div key={i} {...lineProps}>
-                  <span className='ml-1 mr-5 text-white text-opacity-30'>
-                    {i + 1}
-                  </span>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
+                  <div className='relative'>
+                    <span className='absolute w-3 left-0 flex justify-end text-white text-opacity-30'>
+                      {i + 1}
+                    </span>
+                  </div>
+                  <div className='ml-8'>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
                 </div>
               );
             })}
