@@ -83,6 +83,7 @@ export default function Code({ children, className, metastring }) {
                       <span className='ml-1 mr-5 text-white text-opacity-30'>
                         {i + 1}
                       </span>
+
                       {line.map((token, key) => (
                         <span key={key} {...getTokenProps({ token, key })} />
                       ))}
@@ -95,8 +96,14 @@ export default function Code({ children, className, metastring }) {
         </div>
       ) : null}
 
-      <div className='bg-orange rounded-t-lg relative w-full flex justify-between items-center h-14'>
-        <MP className='ml-5'>{title}</MP>
+      <div className='bg-gray-300 rounded-t-lg relative w-full flex justify-between items-center h-14'>
+        <div className='flex items-center ml-5'>
+          <div className='bg-red-500 rounded-full w-3 h-3 mr-1'>&nbsp;</div>
+          <div className='bg-yellow-500 rounded-full w-3 h-3 mr-1'>&nbsp;</div>
+          <div className='bg-green-500 rounded-full w-3 h-3'>&nbsp;</div>
+          <MP className='ml-5'>{title}</MP>
+        </div>
+
         <div
           className='bg-gray-100 mr-3 hover:bg-gray-300 w-10 px-3 py-1 rounded-lg cursor-pointer'
           onClick={() => setLarge(!large)}

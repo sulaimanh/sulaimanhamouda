@@ -51,7 +51,7 @@ export default function Subscribe({ show, handler, className }) {
 
   return (
     <div
-      className={`relative flex flex-col py-5 px-7 bg-gray-100 w-full max-w-2xl mx-auto rounded-lg  ${className}`}
+      className={`relative flex flex-col py-5 px-7 bg-gray-100 w-full max-w-2xl mx-auto rounded-lg  ${className} `}
     >
       {show ? (
         <div className='absolute right-5 flex items-center '>
@@ -94,7 +94,7 @@ export default function Subscribe({ show, handler, className }) {
               />
               <button
                 disabled={status.state === "LOADING" ? true : false}
-                className='bg-black px-5 py-2 w-full rounded-lg text-white mx-auto cursor-pointer hover:bg-transparent border border-2 border-black hover:text-black transition duration-150 ease-in-out'
+                className='bg-black px-5 py-2 w-full rounded-lg text-white mx-auto hover:bg-gray-900 hover:shadow-lg transition duration-150 ease-in-out'
                 type='submit'
               >
                 {status.state === "LOADING" ? (

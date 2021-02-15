@@ -9,10 +9,7 @@ module.exports = {
         success: "#0070f3",
         cyan: "#79FFE1",
         support: "#3BE47A",
-        orange: "#ffd56b",
-        orangeDark: "#e27802",
-        codeBackground: "#15202B",
-        background: "#f0e5d8"
+        orange: "#fd8c04"
       },
       spacing: {
         28: "7rem"
@@ -32,6 +29,15 @@ module.exports = {
       boxShadow: {
         sm: "0 5px 10px rgba(0, 0, 0, 0.12)",
         md: "0 8px 30px rgba(0, 0, 0, 0.12)"
+      },
+      keyframes: {
+        fromBottom: {
+          "0%": { transform: "translateY(1000px)" },
+          "100%": { transform: "translateY(0px)" }
+        }
+      },
+      animation: {
+        fromBottom: "fromBottom 0.7s ease-in-out"
       }
     }
   }

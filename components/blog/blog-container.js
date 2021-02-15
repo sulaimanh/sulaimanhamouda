@@ -64,7 +64,7 @@ export default function Index({ allPosts, sect, views }) {
       ></Modal>
       <Container>
         {data?.description ? (
-          <div className='w-full border border-gray-300 px-5 py-2 rounded-lg mb-5'>
+          <div className='w-full border border-gray-300 px-3 py-2 rounded-lg mb-5'>
             <H4>Upcoming Post:</H4>
             <P className='mt-1'>{data.description}</P>
             <div className='w-full flex justify-end'>

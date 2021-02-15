@@ -14,7 +14,7 @@ export default function Table({ contents }) {
         <ul className='list-disc bg-gray-100 py-7 px-5 rounded-lg'>
           {contents.map(({ title, id }) => {
             return (
-              <li className='ml-5' key={id}>
+              <li className='ml-5 mb-1' key={id}>
                 <div className='flex flex-col w-max'>
                   <Link
                     replace

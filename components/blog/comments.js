@@ -66,22 +66,6 @@ export default function Comments({ slug }) {
       method: "POST"
     });
 
-    if (!user) {
-      const f = e.target;
-      const data = new FormData(f);
-      const xhr = new XMLHttpRequest();
-      xhr.open(f.method, f.action);
-      xhr.setRequestHeader("Accept", "application/json");
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState !== XMLHttpRequest.DONE) return;
-        if (xhr.status === 200) {
-          f.reset();
-        } else {
-        }
-      };
-      xhr.send(data);
-    }
-
     const { error } = res;
     if (error) {
       setStatus({ state: "ERROR", message: error });
@@ -140,7 +124,6 @@ export default function Comments({ slug }) {
       <form
         onSubmit={(e) => submitForm(e)}
         className='w-full p-5 flex flex-col bg-gray-100 rounded-lg rounded-t-none max-w-2xl mx-auto'
-        action={`https://formspree.io/f/xeqpdgdp`}
         method='POST'
       >
         <H3 className='mb-5'>Leave a comment</H3>
@@ -194,7 +177,7 @@ export default function Comments({ slug }) {
           className='p-2 pl-3 mb-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent'
         />
         <button
-          className='bg-black px-5 py-2 w-full rounded-lg text-white mx-auto cursor-pointer hover:bg-transparent border border-2 border-black hover:text-black transition duration-150 ease-in-out'
+          className='bg-black px-5 py-2 w-full rounded-lg text-white mx-auto cursor-pointer hover:bg-gray-900 hover:shadow-lg transition duration-150 ease-in-out'
           type='submit'
         >
           {status.state === "LOADING" ? (
