@@ -1,6 +1,7 @@
 {
   "name": "sulaiman",
   "headerName": "sulaiman",
+  "footerName": "sulaiman",
   "social": [
     { "name": "github", "link": "https://github.com/sulaimanh" },
     {
@@ -13,5 +14,6 @@
     }
   ],
   "description": "husband • developer • learner • writer",
-  "url": "https://sulaimanhamouda.com"
+  "url": "https://sulaimanhamouda.com",
+  "email": "sulaiman@sulaimanhamouda.com"
 }

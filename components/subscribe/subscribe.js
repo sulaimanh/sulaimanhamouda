@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Input from "@/components/input/input";
 import fetcher from "@/lib/fetcher";
+import text from "@/locales/branding.json";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 
@@ -110,8 +111,7 @@ export default function Subscribe({ show, handler, className }) {
                   <div className='mx-auto text-center'>
                     <MP>Thank you for signing up!</MP>
                     <MP>
-                      You will start to receive emails from{" "}
-                      <b>sulaiman@sulaimanhamouda.com</b>
+                      You will start to receive emails from <b>{text.email}</b>
                     </MP>
                   </div>
                 )}

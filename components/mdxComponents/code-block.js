@@ -99,7 +99,7 @@ export default function Code({ children, className, metastring }) {
         </div>
       ) : null}
 
-      <div className='bg-gray-300 rounded-t-lg relative w-full flex justify-between items-center h-14'>
+      <div className='bg-gray-200 rounded-t-lg relative w-full flex justify-between items-center h-14'>
         <div className='flex items-center ml-5'>
           <div className='bg-red-500 rounded-full w-3 h-3 mr-1'>&nbsp;</div>
           <div className='bg-yellow-500 rounded-full w-3 h-3 mr-1'>&nbsp;</div>

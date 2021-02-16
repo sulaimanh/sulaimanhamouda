@@ -26,7 +26,7 @@ export default function Footer() {
           <div className='pb-16 flex justify-between flex-col lg:flex-row items-center'>
             <H3 className='text-4xl lg:text-5xl font-bold tracking-tighter text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2'>
               <Link href='/' passHref>
-                <A className='hover:underline'>{text.name}</A>
+                <A className='hover:underline'>{text.footerName}</A>
               </Link>
             </H3>
 

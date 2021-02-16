@@ -10,7 +10,7 @@ export default function Tag({ title, id }) {
   const router = useRouter();
 
   return (
-    <div id={id}>
+    <div className='pt-24 -mt-24' id={id}>
       <H2
         handler={() => {
           navigator.clipboard.writeText(branding.url + router.asPath);
