@@ -26,7 +26,7 @@ export default function Subscribe({ show, handler, className }) {
 
   useEffect(() => {
     if (router.pathname === "/") {
-      textInput.current.focus();
+      textInput?.current?.focus();
     }
   }, []);
 
