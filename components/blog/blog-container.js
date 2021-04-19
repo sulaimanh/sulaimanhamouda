@@ -79,7 +79,7 @@ export default function Index({ allPosts, sect, views }) {
         ) : null}
         <div className='flex flex-col justify-between mb-2'>
           <div className='flex w-full'>
-            <Dropdown
+            {/* <Dropdown
               className='rounded-r-none w-36'
               fields={blogRoutes}
               title={chosen}
@@ -87,9 +87,9 @@ export default function Index({ allPosts, sect, views }) {
                 setChosen(selected);
                 setSearch("");
               }}
-            />
+            /> */}
             <SearchBar
-              className='rounded-l-none'
+              className=''
               search={search}
               handler={(e) => {
                 setSearch(e.target.value);
