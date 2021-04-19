@@ -37,7 +37,7 @@ export default function Index() {
           <div className='flex md:mt-16 mt-10'>
             <div className='flex-row relative'>
               <H1 className='transition duration-500 ease-in-out hover:translate-x-96 '>
-                {text.name}
+                Welcome
                 <Link passHref href='/admin'>
                   <A>.</A>
                 </Link>
@@ -48,7 +48,7 @@ export default function Index() {
                     <div key={index}>
                       <H2 className='hover:underline cursor-pointer'>
                         <Link passHref href={url}>
-                          <A>{title}.</A>
+                          <A>{title}</A>
                         </Link>
                       </H2>
                     </div>
