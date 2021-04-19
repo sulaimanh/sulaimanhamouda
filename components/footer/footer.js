@@ -31,7 +31,7 @@ export default function Footer() {
             </H3>
 
             <div className='flex justify-center lg:justify-end w-1/2 text-center opacity-50'>
-              <P>{text.description}</P>
+              {/* <P>{text.description}</P> */}
             </div>
           </div>
           <div className='flex justify-center'>
