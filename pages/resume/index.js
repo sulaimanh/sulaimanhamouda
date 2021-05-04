@@ -22,7 +22,7 @@ export default function Resume() {
                 hoverBorderColor='black'
                 hoverTextColor='black'
                 handler={() => {
-                  window.location.href = "http://sulaimanhamouda/resume.pdf";
+                  window.location.href = "https://sulaimanhamouda/resume.pdf";
                 }}
               >
                 Download Resume
@@ -31,7 +31,7 @@ export default function Resume() {
             <div
               className='shadow-md w-max cursor-pointer'
               onClick={() => {
-                window.location.href = "http://sulaimanhamouda/resume.pdf";
+                window.location.href = "https://sulaimanhamouda/resume.pdf";
               }}
             >
               <Image
