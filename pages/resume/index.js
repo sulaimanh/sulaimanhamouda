@@ -4,6 +4,7 @@ import Container from "@/components/container";
 import Head from "next/head";
 import Image from "@/components/mdxComponents/image";
 import Layout from "@/components/layout";
+import Link from "next/link";
 
 export default function Resume() {
   return (
@@ -21,26 +22,24 @@ export default function Resume() {
                 hoverColor='white'
                 hoverBorderColor='black'
                 hoverTextColor='black'
-                handler={() => {
-                  window.location.href = "https://sulaimanhamouda/resume.pdf";
-                }}
               >
-                Download Resume
+                <Link passHref href='/resume.pdf'>
+                  <A>Download Resume</A>
+                </Link>
               </Button>
             </div>
-            <div
-              className='shadow-md w-max cursor-pointer'
-              onClick={() => {
-                window.location.href = "https://sulaimanhamouda/resume.pdf";
-              }}
-            >
-              <Image
-                alt='Resume'
-                width='400'
-                height='500'
-                src='/assets/personal/resume.png'
-              />
-            </div>
+            <Link href='/resume.pdf' passHref>
+              <A>
+                <div className='shadow-md w-max cursor-pointer'>
+                  <Image
+                    alt='Resume'
+                    width='400'
+                    height='500'
+                    src='/assets/personal/resume.png'
+                  />
+                </div>
+              </A>
+            </Link>
             <div className='mt-5'>
               <A blue outerLink href='https://github.com/sulaimanh'>
                 GitHub
