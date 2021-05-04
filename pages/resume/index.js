@@ -49,7 +49,7 @@ export default function Resume() {
                 className='ml-3'
                 blue
                 outerLink
-                href='https://github.com/sulaimanh'
+                href='https://www.linkedin.com/in/sulaimanhamouda/'
               >
                 LinkedIn
               </A>
